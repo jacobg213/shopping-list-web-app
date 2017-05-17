@@ -17,4 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('register', [
+    'as' => 'register',
+    'uses' => function () {return redirect()->back();}
+]);
+
+Route::post('register', [
+    'uses' => function () {return redirect()->back();}
+]);
+
 Route::get('/home', 'HomeController@index')->name('home');
