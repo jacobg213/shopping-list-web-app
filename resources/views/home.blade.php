@@ -26,6 +26,7 @@
                         </div>
                     </form>
                     <button id="submit_item">Add to list</button>
+                    <button id="remove_all" class="pull-right">Remove all</button>
                 </div>
             </div>
         </div>

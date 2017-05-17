@@ -118,6 +118,13 @@
                 database.push(item);
                 return false;
             });
+
+            $('#remove_all').click(function () {
+               var sure = confirm('Are you sure? This cannot be undone!');
+               if (sure) {
+                    database.remove();
+               }
+            });
         });
 
         function delete_item(i) {
