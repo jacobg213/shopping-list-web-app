@@ -5,7 +5,10 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="panel panel-default">
-                <div class="panel-heading">To buy:</div>
+                <div class="panel-heading">
+                    <span>To buy:</span>
+                    <button class="pull-right" onclick="restore_deleted()">Restore last removed</button>
+                </div>
 
                 <div class="panel-body">
                 <ul id="items">
@@ -25,8 +28,8 @@
                             <input id="qty" title="Quantity" type="number" name="quantity" placeholder="Quantity">
                         </div>
                     </form>
-                    <button id="submit_item">Add to list</button>
-                    <button id="remove_all" class="pull-right">Remove all</button>
+                    <button id="remove_all">Remove all</button>
+                    <button id="submit_item" class="pull-right">Add to list</button>
                 </div>
             </div>
         </div>

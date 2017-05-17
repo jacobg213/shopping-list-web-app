@@ -103,18 +103,24 @@
             var i = 1;
             for(var item in snapshot.val())
             {
-                list.append("<div class='row margin'><li><span>" + snapshot.val()[item].name + ', x' + snapshot.val()[item].quantity + "</span><button class='pull-right' id='item-" + i + "' data-id='" + item + "' onClick='delete_item(" + i + ")'>Remove item</button></li></div>");
+                list.append("<div id='item-div-" + i + "' class='row margin'><li><span>" + snapshot.val()[item].name + "</span><i>, x<b>" + snapshot.val()[item].quantity + "</b></i><button class='pull-right' id='item-" + i + "' data-id='" + item + "' onClick='delete_item(" + i + ")'>Remove item</button></li></div>");
                 i++;
             }
         });
 
         $(document).ready(function() {
             $('#submit_item').click(function () {
+                var name = $('#name').val();
+                var qty = $('#qty').val();
+                if(name == '' || name == undefined || qty =='' || qty == undefined || name == ' ' || qty == ' ')
+                {
+                    alert('Name and Qunatity are required');
+                    return false;
+                }
                 var item = {
-                    name: $('#name').val(),
-                    quantity: $('#qty').val()
+                    name: name,
+                    quantity: qty
                 };
-                console.log(item);
                 database.push(item);
                 return false;
             });
@@ -127,10 +133,25 @@
             });
         });
 
+        var deleted;
+
         function delete_item(i) {
             var id = $('#item-' + i).attr('data-id');
-            console.log(id);
+            deleted = $('#item-div-'+i);
             database.child(id).remove();
+        }
+
+        function restore_deleted () {
+            if(deleted != null && deleted != undefined && deleted != '')
+            {
+                var name = deleted.find('span').text();
+                var qty = deleted.find('b').text();
+                var item = {
+                    name: name,
+                    quantity: qty
+                };
+                database.push(item);
+            }
         }
     </script>
     <script src="{{ asset('js/app.js') }}"></script>
