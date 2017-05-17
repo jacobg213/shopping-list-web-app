@@ -84,75 +84,7 @@
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyD5LkxJYlnXxbb1MrRYBljpRU7H2oFqDwk",
-            authDomain: "shopping-list-f3b3f.firebaseapp.com",
-            databaseURL: "https://shopping-list-f3b3f.firebaseio.com",
-            projectId: "shopping-list-f3b3f",
-            storageBucket: "shopping-list-f3b3f.appspot.com",
-            messagingSenderId: "141470586772"
-        };
-        firebase.initializeApp(config);
-        var database = firebase.database().ref().child('items');
-        database.on('value', function(snapshot) {
-            var list = $('#items');
-            list.empty();
-            var i = 1;
-            for(var item in snapshot.val())
-            {
-                list.append("<div id='item-div-" + i + "' class='row margin'><li><span>" + snapshot.val()[item].name + "</span><i>, x<b>" + snapshot.val()[item].quantity + "</b></i><button class='pull-right' id='item-" + i + "' data-id='" + item + "' onClick='delete_item(" + i + ")'>Remove item</button></li></div>");
-                i++;
-            }
-        });
-
-        $(document).ready(function() {
-            $('#submit_item').click(function () {
-                var name = $('#name').val();
-                var qty = $('#qty').val();
-                if(name == '' || name == undefined || qty =='' || qty == undefined || name == ' ' || qty == ' ')
-                {
-                    alert('Name and Qunatity are required');
-                    return false;
-                }
-                var item = {
-                    name: name,
-                    quantity: qty
-                };
-                database.push(item);
-                return false;
-            });
-
-            $('#remove_all').click(function () {
-               var sure = confirm('Are you sure? This cannot be undone!');
-               if (sure) {
-                    database.remove();
-               }
-            });
-        });
-
-        var deleted;
-
-        function delete_item(i) {
-            var id = $('#item-' + i).attr('data-id');
-            deleted = $('#item-div-'+i);
-            database.child(id).remove();
-        }
-
-        function restore_deleted () {
-            if(deleted != null && deleted != undefined && deleted != '')
-            {
-                var name = deleted.find('span').text();
-                var qty = deleted.find('b').text();
-                var item = {
-                    name: name,
-                    quantity: qty
-                };
-                database.push(item);
-            }
-        }
-    </script>
+    @yield('scripts')
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
