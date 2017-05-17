@@ -64,11 +64,20 @@
     $(document).ready(function() {
         $('#submit_item').click(function () {
             var name = $('#name').val();
-            var qty = parseInt($('#qty').val());
-            if(name == '' || name == undefined || qty =='' || qty == undefined || name == ' ' || qty == ' ')
+            if(name == '' || name == undefined)
             {
-                alert('Name and Qunatity are required');
+                alert('Name is required');
                 return false;
+            }
+
+            var qty = $('#qty').val();
+            if(qty =='' || qty == undefined || name == ' ' || qty == ' ')
+            {
+                qty = 0;
+            }
+            else
+            {
+                qty = parseInt(qty);
             }
             var item = {
                 name: name,
