@@ -16,6 +16,11 @@
         .margin {
             margin: 0.5em;
         }
+        .img-brand {
+            top: -14px;
+            height: 50px;
+            position: relative;
+        }
     </style>
 </head>
 <body>
@@ -34,7 +39,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Shopping List Web App') }}
+                        <img class="img-brand" src="{{ asset('/img/logo.png') }}" />
                     </a>
                 </div>
 
