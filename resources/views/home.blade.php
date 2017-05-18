@@ -71,7 +71,7 @@
             }
 
             var qty = $('#qty').val();
-            if(qty =='' || qty == undefined || name == ' ' || qty == ' ')
+            if(qty =='' || qty == undefined || name == ' ' || qty == ' ' || parseInt(qty) < 0 )
             {
                 qty = 0;
             }
