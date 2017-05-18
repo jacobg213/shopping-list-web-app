@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Shopping List
+                    <img class="img-responsive" src="{{ asset('img/logo.png') }}" />
                 </div>
 
                 <div class="links">
