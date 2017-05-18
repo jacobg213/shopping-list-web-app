@@ -40,7 +40,7 @@
 @section('scripts')
 <script>
     // Initialize Firebase
-    var config = {
+    let config = {
         apiKey: "AIzaSyD5LkxJYlnXxbb1MrRYBljpRU7H2oFqDwk",
         authDomain: "shopping-list-f3b3f.firebaseapp.com",
         databaseURL: "https://shopping-list-f3b3f.firebaseio.com",
@@ -49,12 +49,12 @@
         messagingSenderId: "141470586772"
     };
     firebase.initializeApp(config);
-    var database = firebase.database().ref().child('items');
+    let database = firebase.database().ref().child('items');
     database.on('value', function(snapshot) {
-        var list = $('#items');
+        let list = $('#items');
         list.empty();
-        var i = 1;
-        for(var item in snapshot.val())
+        let i = 1;
+        for(let item in snapshot.val())
         {
             list.append("<div id='item-div-" + i + "' class='row margin'><li><span>" + snapshot.val()[item].name + "</span><i>, x<b>" + snapshot.val()[item].quantity + "</b></i><button class='pull-right' id='item-" + i + "' data-id='" + item + "' onClick='delete_item(" + i + ")'>Remove item</button></li></div>");
             i++;
@@ -63,14 +63,14 @@
 
     $(document).ready(function() {
         $('#submit_item').click(function () {
-            var name = $('#name').val();
+            let name = $('#name').val();
             if(name == '' || name == undefined)
             {
                 alert('Name is required');
                 return false;
             }
 
-            var qty = $('#qty').val();
+            let qty = $('#qty').val();
             if(qty =='' || qty == undefined || name == ' ' || qty == ' ' || parseInt(qty) < 0 )
             {
                 qty = 0;
@@ -79,7 +79,7 @@
             {
                 qty = parseInt(qty);
             }
-            var item = {
+            let item = {
                 name: name,
                 quantity: qty
             };
@@ -88,17 +88,17 @@
         });
 
         $('#remove_all').click(function () {
-            var sure = confirm('Are you sure? This cannot be undone!');
+            let sure = confirm('Are you sure? This cannot be undone!');
             if (sure) {
                 database.remove();
             }
         });
     });
 
-    var deleted;
+    let deleted;
 
     function delete_item(i) {
-        var id = $('#item-' + i).attr('data-id');
+        let id = $('#item-' + i).attr('data-id');
         deleted = $('#item-div-'+i);
         database.child(id).remove();
     }
@@ -106,9 +106,9 @@
     function restore_deleted () {
         if(deleted != null && deleted != undefined && deleted != '')
         {
-            var name = deleted.find('span').text();
-            var qty = parseInt(deleted.find('b').text());
-            var item = {
+            let name = deleted.find('span').text();
+            let qty = parseInt(deleted.find('b').text());
+            let item = {
                 name: name,
                 quantity: qty
             };
